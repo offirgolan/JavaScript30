@@ -22,6 +22,22 @@
 
   <style>
 
+    :root {
+      --spacing: 10px;
+      --blur: 10px;
+      --base: #ffc600;
+    }
+
+    img {
+      padding: var(--spacing);
+      filter: blur(var(--blur));
+      background-color: var(--base);
+    }
+
+    .hl {
+      color: var(--base);
+    }
+
     /*
       misc styles, nothing to do with CSS variables
     */
@@ -48,6 +64,15 @@
   </style>
 
   <script>
+    function updateValue() {
+      const sizing = this.dataset.sizing || '';
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + sizing);
+    }
+
+    document.querySelectorAll('.controls input').forEach((input) => {
+      input.addEventListener('change', updateValue);
+      input.addEventListener('mousemove', updateValue);
+    });
   </script>
 
 </body>
