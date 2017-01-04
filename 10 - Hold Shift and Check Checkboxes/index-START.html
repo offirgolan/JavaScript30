@@ -104,6 +104,22 @@
   </div>
 
 <script>
+const checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
+let isShift = false;
+let lastCheckedIdx = -1;
+
+function onClick(e) {
+  const currIndx = checkboxes.indexOf(this);
+
+  if (e.shiftKey && this.checked && lastCheckedIdx > -1) {
+    checkboxes.slice(Math.min(currIndx, lastCheckedIdx), Math.max(currIndx, lastCheckedIdx))
+              .forEach(c => c.checked = true);
+  }
+
+  lastCheckedIdx = currIndx;
+}
+
+checkboxes.forEach(checkbox => checkbox.addEventListener('click', onClick))
 </script>
 </body>
 </html>
