@@ -7,6 +7,20 @@
 </head>
 <body>
 <script>
+  const keys = [];
+  const code = 'unicorn';
+
+  window.addEventListener('keyup', (e) => {
+    keys.push(e.key);
+
+    if (keys.length > code.length) {
+      keys.shift();
+    }
+
+    if (keys.join('') === code) {
+      cornify_add();
+    }
+  })
 </script>
 </body>
 </html>
