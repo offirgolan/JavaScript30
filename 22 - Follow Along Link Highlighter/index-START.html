@@ -26,8 +26,33 @@
     </div>
 
   <script>
-    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+    const triggers = document.querySelectorAll('a');
+    const highlight = document.createElement('span');
+
+    highlight.classList.add('highlight');
+    document.querySelector('body').appendChild(highlight);
+
+    function follow(e) {
+      const _clientRect = this.getBoundingClientRect();
+      const clientRect = {
+        width: _clientRect.width,
+        height: _clientRect.height,
+        top: _clientRect.top + window.scrollY,
+        left: _clientRect.left + window.scrollX
+      };
+
+      highlight.style.width = `${clientRect.width}px`;
+      highlight.style.height = `${clientRect.height}px`;
+      highlight.style.transform = `translate(${clientRect.left}px, ${clientRect.top}px)`;
+      highlight.style.opacity = 1;
+    }
+
+    function unfollow() {
+      highlight.style.opacity = 0;
+    }
+
+    triggers.forEach(t => t.addEventListener('mouseenter', follow))
+    triggers.forEach(t => t.addEventListener('mouseleave', unfollow))
   </script>
 </body>
 </html>
-
